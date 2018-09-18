@@ -1,17 +1,17 @@
 import { authConstants } from '../constants';
 
-let user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ?
+let token = JSON.parse(localStorage.getItem('token'));
+const initialState = token ?
 {
   loggingIn: false,
   loggedIn: true,
-  user: user,
+  token: token,
   error: false,
 }
 : {
   loggingIn: false,
   loggedIn: false,
-  user: null,
+  token: null,
   error: false,
 };
 
@@ -22,7 +22,6 @@ export function auth(state = initialState, action) {
         ...state,
         loggingIn: true,
         loggedIn: false,
-        user: action.payload.user,
         error: false,
       };
     case authConstants.LOGIN_SUCCESS:
@@ -30,7 +29,7 @@ export function auth(state = initialState, action) {
         ...state,
         loggingIn: false,
         loggedIn: true,
-        user: action.payload.user,
+        token: action.payload.token,
       };
     case authConstants.LOGIN_FAILURE:
       return {
@@ -41,7 +40,7 @@ export function auth(state = initialState, action) {
       return {
         ...state,
         loggedIn: false,
-        user: null,
+        token: null,
         error: false
       };
     default:

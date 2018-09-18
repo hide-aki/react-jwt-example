@@ -1,6 +1,6 @@
 import { authHeader } from '../helpers';
 
-const apiHost = 'http://laravel-api.local/api';
+const apiHost = 'http://localhost:8080/api';
 
 export const userService = {
     login,
@@ -14,7 +14,7 @@ function login(username, password) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(
           {
-            email: username,
+            name: username,
             password
           }
         )
@@ -22,20 +22,20 @@ function login(username, password) {
 
     return fetch(`${apiHost}/authenticate`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(data => {
             // login successful if there's a jwt token in the response
-            if (user.token) {
+            if (data.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('token', JSON.stringify(data.token));
             }
 
-            return user;
+            return data;
         });
 }
 
 function logout() {
     // ログアウト時にはローカルストレージからuserアイテムを削除する
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
 }
 
 function getMe() {

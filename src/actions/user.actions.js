@@ -3,11 +3,11 @@ import { userService } from '../services';
 
 export const getMe = () => {
     return dispatch => {
-        dispatch(request());
+        dispatch(getMeRequest());
 
         userService.getMe()
             .then(
-                user => dispatch(getMeSuccess(user)),
+                data => dispatch(getMeSuccess(data)),
                 error => dispatch(getMeFailure(error))
             );
     };
@@ -16,11 +16,15 @@ export const getMe = () => {
 const getMeRequest = () => ({
   type: userConstants.GET_ME_REQUEST
 });
-const getMeSuccess = (user) => ({
+const getMeSuccess = (data) => ({
   type: userConstants.GET_ME_SUCCESS,
-  user
+  payload: data
 });
 const getMeFailure = (error) => ({
   type: userConstants.GET_ME_FAILURE,
   error
+});
+
+export const clearMe = () => ({
+  type: userConstants.CLEAR_ME
 });

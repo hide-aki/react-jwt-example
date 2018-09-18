@@ -8,8 +8,8 @@ export const login = (username, password) => {
 
         userService.login(username, password)
           .then(
-              user => {
-                  dispatch(loginSuccess(user));
+              data => {
+                  dispatch(loginSuccess(data));
                   dispatch(push('/dashboard'));
               },
               error => {
@@ -33,15 +33,14 @@ const logout = () => ({
 });
 
 
-const loginRequest = user => ({
+const loginRequest = data => ({
   type: authConstants.LOGIN_REQUEST,
-  payload: user
 });
 
 
-const loginSuccess = user => ({
+const loginSuccess = data => ({
   type: authConstants.LOGIN_SUCCESS,
-  payload: user
+  payload: data
 });
 const loginFailure = error => ({
   type: authConstants.LOGIN_FAILURE,

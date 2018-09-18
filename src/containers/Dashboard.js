@@ -1,12 +1,18 @@
 import { connect } from 'react-redux';
 import Dashboard from '../components/Dashboard';
-import * as actions from '../actions/auth.actions';
-
-const mapStateToProps = (state, ownProps) => ({});
+import { logoutAndRedirect } from '../actions/auth.actions';
+import { getMe, clearMe } from '../actions/user.actions';
+const mapStateToProps = (state, ownProps) => ({
+  me: state.user.me
+});
 
 const mapDispatchToProps = dispatch => ({
   logout() {
-    dispatch(actions.logoutAndRedirect());
+    dispatch(logoutAndRedirect());
+    dispatch(clearMe());
+  },
+  onMount() {
+    dispatch(getMe());
   }
 });
 
