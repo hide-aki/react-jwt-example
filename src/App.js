@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div className={classes.root}>
         <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
-        <Route path="/login" component={Login}></Route>
+        <Route path="/" exact={true} component={Login}></Route>
       </div>
     );
   }
