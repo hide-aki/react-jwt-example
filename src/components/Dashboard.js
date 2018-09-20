@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.onMount();
   }
   render() {
